@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
 import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-import { DataTable } from "@/components/data-table"
+
 import { SectionCards } from "@/components/section-cards"
 import {
   SidebarInset,
@@ -30,14 +30,7 @@ export default function Page() {
     employees : []
   }>()
 
-  const data = [
-    { label: "Total Employee", value: props.totalEmployee },
-    { label: "Male Employee", value: props.totalMaleEmployee },
-    { label: "Female Employee", value: props.totalFemaleEmployee },
-    { label: "New This Month", value: props.newEmployee },
-    { label: "Terminated", value: props.terminatedEmployee },
-    { label: "On Leave", value: props.leaveEmployee },
-  ]
+  
 
   return (
     <SidebarProvider>
@@ -70,7 +63,10 @@ export default function Page() {
               <div className="px-4 lg:px-6">
                 <ChartAreaInteractive />
               </div>
-              <EmployeeTable data={props.employees} />
+              <div className="px-4 lg:px-6">
+
+              <EmployeeTable employees={props.employees} />
+              </div>
 
             </div>
           </div>

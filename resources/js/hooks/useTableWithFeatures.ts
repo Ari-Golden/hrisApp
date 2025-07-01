@@ -10,7 +10,7 @@ import { useState } from "react"
 
 export function useTableWithFeatures<T>(data: T[], columns: ColumnDef<T>[]) {
   const [globalFilter, setGlobalFilter] = useState("")
-  const [sorting, setSorting] = useState<any[]>([])
+  const [sorting, setSorting] = useState<SortingState>([])
 
   const table = useReactTable({
     data,

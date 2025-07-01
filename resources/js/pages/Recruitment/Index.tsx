@@ -5,7 +5,7 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/s
 import { RecruitmentCards } from '@/pages/Recruitment/RecruitmentCards';
 import { usePage } from '@inertiajs/react';
 import { CandidateTableList } from './CandidateCardList';
-import { RecruitmentCalendar } from './RecruitmentCalendar';
+
 
 export default function Page() {
     const { props } = usePage<{

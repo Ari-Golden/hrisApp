@@ -5,8 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Bar, BarChart, XAxis } from 'recharts';
 
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+
 import { useRef } from 'react';
 
 const dataAbsensi = [
@@ -41,26 +40,7 @@ const chartConfig = {
 export default function AbsensiChart() {
     const chartRef = useRef<HTMLDivElement>(null);
 
-    const handleExportPDF = async () => {
-        if (!chartRef.current) return;
-        const canvas = await html2canvas(chartRef.current);
-        const imgData = canvas.toDataURL('image/png');
-
-        const pdf = new jsPDF({
-            orientation: 'landscape',
-            unit: 'px',
-            format: [canvas.width, canvas.height + 100],
-        });
-
-        pdf.setFontSize(20);
-        pdf.text('Laporan Grafik Absensi Bulanan', 40, 40);
-        pdf.setFontSize(12);
-        pdf.text(`Dicetak pada: ${new Date().toLocaleDateString('id-ID')}`, 40, 60);
-        pdf.text('Grafik ini menunjukkan absensi 6 bulan terakhir.', 40, 80);
-
-        pdf.addImage(imgData, 'PNG', 40, 100, canvas.width - 80, canvas.height * 0.85);
-        pdf.save('grafik-absensi.pdf');
-    };
+    
 
     return (
         <Card>

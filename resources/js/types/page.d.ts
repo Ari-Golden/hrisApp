@@ -22,5 +22,10 @@ export interface Employee {
 export interface PageProps {
     employees: Employee[];
     totalEmployee: number;
-    [key: string]: any;
+    totalEmployee: number;
+    totalMaleEmployee: number;
+    totalFemaleEmployee: number;
+    newEmployee: number;
+    terminatedEmployee: number;
+    leaveEmployee: number;
 }

@@ -1,12 +1,114 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Employee } from '@/types/page';
+import {
+    ColumnDef,
+} from "@tanstack/react-table"
+import { Button } from '@/components/ui/button';
+import React from 'react';
+import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react';
+import { DataTable } from '@/components/ui/data-table';
 
 interface EmployeeTableProps {
-    employees: Employee[];
+    employees?: Employee[];
 }
 
-export function EmployeeTable({ employees }: EmployeeTableProps) {
+export function EmployeeTable({ employees = [] }: EmployeeTableProps) {
+
+    const columns: ColumnDef<Employee>[] = [
+        {
+            accessorKey: "nama",
+            header: ({ column }) => (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className="w-full justify-start text-left"
+                >
+                    Name
+                    {{
+                        asc: <ArrowUp className="ml-2 h-4 w-4" />,
+                        desc: <ArrowDown className="ml-2 h-4 w-4" />,
+                    }[column.getIsSorted() as string] ?? <ArrowUpDown className="ml-2 h-4 w-4" />}
+                </Button>
+            ),
+            cell: ({ row }) => (
+                <div className="capitalize pl-4">{row.getValue("nama")}</div>
+            ),
+        },
+        {
+            id: "golongan",
+            accessorFn: row => row.golongan?.nama ?? 'N/A',
+            header: ({ column }) => (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className="w-full justify-start text-left"
+                >
+                    Golongan
+                    {{
+                        asc: <ArrowUp className="ml-2 h-4 w-4" />,
+                        desc: <ArrowDown className="ml-2 h-4 w-4" />,
+                    }[column.getIsSorted() as string] ?? <ArrowUpDown className="ml-2 h-4 w-4" />}
+                </Button>
+            ),
+            cell: ({ row }) => <div className="pl-4">{row.getValue("golongan")}</div>,
+        },
+        {
+            id: "departemen",
+            accessorFn: row => row.departemen?.nama ?? 'N/A',
+            header: ({ column }) => (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className="w-full justify-start text-left"
+                >
+                    Department
+                    {{
+                        asc: <ArrowUp className="ml-2 h-4 w-4" />,
+                        desc: <ArrowDown className="ml-2 h-4 w-4" />,
+                    }[column.getIsSorted() as string] ?? <ArrowUpDown className="ml-2 h-4 w-4" />}
+                </Button>
+            ),
+            cell: ({ row }) => <div className="pl-4">{row.getValue("departemen")}</div>,
+        },
+        {
+            id: "jabatan",
+            accessorFn: row => row.jabatan?.nama ?? 'N/A',
+            header: ({ column }) => (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className="w-full justify-start text-left"
+                >
+                    Position
+                    {{
+                        asc: <ArrowUp className="ml-2 h-4 w-4" />,
+                        desc: <ArrowDown className="ml-2 h-4 w-4" />,
+                    }[column.getIsSorted() as string] ?? <ArrowUpDown className="ml-2 h-4 w-4" />}
+                </Button>
+            ),
+            cell: ({ row }) => <div>{row.getValue("jabatan")}</div>,
+        },
+        {
+            accessorKey: "status",
+            header: ({ column }) => (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className="w-full justify-start text-left"
+                >
+                    Status
+                    {{
+                        asc: <ArrowUp className="ml-2 h-4 w-4" />,
+                        desc: <ArrowDown className="ml-2 h-4 w-4" />,
+                    }[column.getIsSorted() as string] ?? <ArrowUpDown className="ml-2 h-4 w-4" />}
+                </Button>
+            ),
+            cell: ({ row }) => (
+                <div className="capitalize pl-4">{row.getValue("status")}</div>
+            ),
+        },
+    ]
+
     return (
         <Card>
             <CardHeader>
@@ -14,28 +116,7 @@ export function EmployeeTable({ employees }: EmployeeTableProps) {
                 <CardDescription>A list of all the employees in your company.</CardDescription>
             </CardHeader>
             <CardContent>
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Name</TableHead>
-                            <TableHead>Golongan</TableHead>
-                            <TableHead>Department</TableHead>
-                            <TableHead>Position</TableHead>
-                            <TableHead>Status</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {employees.map((employee) => (
-                            <TableRow key={employee.id}>
-                                <TableCell>{employee.nama}</TableCell>
-                                <TableCell>{employee.golongan?.nama?? 'N/A'}</TableCell>
-                                <TableCell>{employee.departemen?.nama ?? 'N/A'}</TableCell>
-                                <TableCell>{employee.jabatan?.nama ?? 'N/A'}</TableCell>
-                                <TableCell>{employee.status}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                <DataTable columns={columns} data={employees} exportFileName="employees" />
             </CardContent>
         </Card>
     );

@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/table"
 import * as XLSX from "xlsx"
 import { saveAs } from "file-saver"
-// @ts-ignore
+// @ts-expect-error: `file-saver` does not have type definitions.
 
 import { Attendance } from "@/types";
 

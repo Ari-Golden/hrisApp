@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { IconChecklist, IconUsers, IconUserPlus, IconUserSearch, IconBriefcase } from "@tabler/icons-react"
+import { IconChecklist, IconUsers, IconUserPlus, IconBriefcase } from "@tabler/icons-react"
 
 type RecruitmentStats = {
   totalApplicants: number
