@@ -7,7 +7,7 @@ This is an HRIS (Human Resource Information System) application built with the T
 - **Backend:** Laravel (PHP)
 - **Frontend:** React, TypeScript, Inertia.js
 - **Styling:** Tailwind CSS
-- **Database:** SQLite (based on `database/database.sqlite`)
+- **Database:** mysql
 - **Testing:** PHPUnit, Pest
 - **Build Tool:** Vite
 
