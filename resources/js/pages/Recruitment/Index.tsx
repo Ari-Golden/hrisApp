@@ -4,14 +4,13 @@ import { Separator } from '@/components/ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { RecruitmentCards } from '@/pages/Recruitment/RecruitmentCards';
 import { usePage } from '@inertiajs/react';
-import { CandidateTableList } from './CandidateCardList';
-
+import { CandidateCardList } from './CandidateCardList';
 
 export default function Page() {
-    const { props } = usePage<{
+    const { stats, candidates } = usePage<{
         stats: RecruitmentStats;
         candidates: Candidate[];
-    }>();
+    }>().props;
 
     return (
         <SidebarProvider>
@@ -24,7 +23,7 @@ export default function Page() {
                         <Breadcrumb>
                             <BreadcrumbList>
                                 <BreadcrumbItem className="hidden md:block">
-                                    <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
+                                    <BreadcrumbLink href="#">Recruitment Dashboard</BreadcrumbLink>
                                 </BreadcrumbItem>
                                 <BreadcrumbSeparator className="hidden md:block" />
                                 <BreadcrumbItem>
@@ -36,13 +35,14 @@ export default function Page() {
                 </header>
                 <div className="flex flex-1 flex-col">
                     <div className="@container/main flex flex-1 flex-col gap-2">
-                        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-                            <RecruitmentCards stats={props.stats} />
-                            <div className="px-4 lg:px-6">
-                                {/* <RecruitmentCalendar /> */}
+                        <div className="flex flex-col gap-2 py-2 md:gap-6 md:py-6">
+                            <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
+                                <div className="lg:col-span-3">
+                                    <RecruitmentCards stats={stats} />
+                                </div>
                             </div>
-                            <div className="px-4 lg:px-6">
-                                <CandidateTableList candidates={props.candidates} />
+                            <div className="mt-4">
+                                <CandidateCardList candidates={candidates} />
                             </div>
                         </div>
                     </div>

@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\GolonganController;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,14 +24,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'newEmployee' => Employee::whereMonth('join_date', now()->month)->count(),
             'terminatedEmployee' => Employee::where('status', 'non-aktif')->count(),
             'leaveEmployee' => 5,
-            'employees'=> Employee::with('jabatan', 'golongan', 'departemen')->get(),
         ]);
     })->name('dashboard');
     Route::resource('Recruitment',RecruitmentController::class);
     Route::resource('Payroll',PayrollController::class);
+    Route::get('Calendar', [CalendarController::class, 'index'])->name('Calendar');
+    Route::get('api/events', [CalendarController::class, 'events']);
+    Route::resource('events', EventController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
 
     Route::resource('Employee', EmployeeController::class);
     Route::resource('Attendance', AttendanceController::class);
+
+    Route::get('Golongan', [GolonganController::class, 'index'])->name('golongan.index');
+    Route::get('Golongan/create', [GolonganController::class, 'create'])->name('golongan.create');
+    Route::post('Golongan', [GolonganController::class, 'store'])->name('golongan.store');
+    Route::get('Golongan/{golongan}/edit', [GolonganController::class, 'edit'])->name('golongan.edit');
+    Route::put('Golongan/{golongan}', [GolonganController::class, 'update'])->name('golongan.update');
+    Route::delete('Golongan/{golongan}', [GolonganController::class, 'destroy'])->name('golongan.destroy');
+    Route::get('salary-structure', [GolonganController::class, 'getSalaryStructure'])->name('salary.structure');
 });
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

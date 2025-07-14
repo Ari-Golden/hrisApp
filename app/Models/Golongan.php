@@ -9,7 +9,7 @@ class Golongan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['kode', 'nama', 'keterangan'];
+    protected $fillable = ['kode', 'nama', 'keterangan', 'gaji'];
 
     public function employees()
     {

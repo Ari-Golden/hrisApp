@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
 import { ChartAreaInteractive } from "@/components/chart-area-interactive"
+import { DashboardCalendar } from "@/components/dashboard-calendar"
 
 import { SectionCards } from "@/components/section-cards"
 import {
@@ -64,8 +65,11 @@ export default function Page() {
                 <ChartAreaInteractive />
               </div>
               <div className="px-4 lg:px-6">
+                <DashboardCalendar />
+              </div>
+              <div className="px-4 lg:px-6">
 
-              <EmployeeTable employees={props.employees} />
+              {/* <EmployeeTable employees={props.employees} /> */}
               </div>
 
             </div>

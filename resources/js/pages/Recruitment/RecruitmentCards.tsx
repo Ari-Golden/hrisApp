@@ -24,11 +24,11 @@ type RecruitmentStats = {
 
 export function RecruitmentCards({ stats }: { stats: RecruitmentStats }) {
   return (
-    <div className="grid grid-cols-1 gap-4 px-4 lg:grid-cols-2 @4xl:grid-cols-3">
-      <Card>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4">
+      <Card className="h-full min-h-[150px]">
         <CardHeader>
           <CardDescription>Jumlah Pelamar</CardDescription>
-          <CardTitle className="text-3xl font-semibold flex gap-2 items-center">
+          <CardTitle className="text-3xl font-semibold flex gap-2 items-center flex-grow">
             <IconUsers className="text-muted-foreground" />
             {stats.totalApplicants}
           </CardTitle>
@@ -41,10 +41,10 @@ export function RecruitmentCards({ stats }: { stats: RecruitmentStats }) {
         </CardFooter>
       </Card>
 
-      <Card>
+      <Card className="h-full min-h-[150px]">
         <CardHeader>
           <CardDescription>Kebutuhan per Bagian</CardDescription>
-          <CardTitle className="text-3xl font-semibold flex gap-2 items-center">
+          <CardTitle className="text-3xl font-semibold flex gap-2 items-center flex-grow">
             <IconBriefcase className="text-muted-foreground" />
             {stats.totalPositions}
           </CardTitle>
@@ -57,10 +57,10 @@ export function RecruitmentCards({ stats }: { stats: RecruitmentStats }) {
         </CardFooter>
       </Card>
 
-      <Card>
+      <Card className="h-full min-h-[150px]">
         <CardHeader>
           <CardDescription>Tersorter</CardDescription>
-          <CardTitle className="text-3xl font-semibold flex gap-2 items-center">
+          <CardTitle className="text-3xl font-semibold flex gap-2 items-center flex-grow">
             <IconChecklist className="text-muted-foreground" />
             {stats.totalSorted}
           </CardTitle>
@@ -73,14 +73,14 @@ export function RecruitmentCards({ stats }: { stats: RecruitmentStats }) {
         </CardFooter>
       </Card>
 
-      <Card>
+      <Card className="h-full min-h-[150px]">
         <CardHeader>
           <CardDescription>Proses Seleksi</CardDescription>
-          <CardTitle className="text-2xl font-medium">
-            Screening: {stats.totalByStage.screening} | Interview: {stats.totalByStage.interview}
-          </CardTitle>
-          <CardTitle className="text-2xl font-medium">
-            Offering: {stats.totalByStage.offering} | Rejected: {stats.totalByStage.rejected}
+          <CardTitle className="text-xl font-10 px flex-grow">
+           <span>Screening: {stats.totalByStage.screening}</span> <br />
+           <span>Interview: {stats.totalByStage.interview}</span> <br />
+            <span>Offering: {stats.totalByStage.offering}</span> <br />
+            <span>Rejected: {stats.totalByStage.rejected}</span>
           </CardTitle>
           <CardAction>
             <Badge variant="outline">Tahapan Seleksi</Badge>
@@ -91,10 +91,10 @@ export function RecruitmentCards({ stats }: { stats: RecruitmentStats }) {
         </CardFooter>
       </Card>
 
-      <Card>
+      <Card className="h-full min-h-[150px]">
         <CardHeader>
           <CardDescription>Sudah Bergabung</CardDescription>
-          <CardTitle className="text-3xl font-semibold flex gap-2 items-center">
+          <CardTitle className="text-3xl font-semibold flex gap-2 items-center flex-grow">
             <IconUserPlus className="text-muted-foreground" />
             {stats.totalJoined}
           </CardTitle>
@@ -103,7 +103,7 @@ export function RecruitmentCards({ stats }: { stats: RecruitmentStats }) {
           </CardAction>
         </CardHeader>
         <CardFooter className="text-sm text-muted-foreground">
-          Kandidat sudah onboarding
+          Kandidat onboarding
         </CardFooter>
       </Card>
     </div>

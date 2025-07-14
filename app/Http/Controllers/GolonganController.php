@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Golongan;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class GolonganController extends Controller
 {
@@ -12,7 +13,10 @@ class GolonganController extends Controller
      */
     public function index()
     {
-        //
+        $golongans = Golongan::all();
+        return Inertia::render('Golongan/Index', [
+            'golongans' => $golongans,
+        ]);
     }
 
     /**
@@ -20,7 +24,7 @@ class GolonganController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Golongan/Create');
     }
 
     /**
@@ -28,7 +32,16 @@ class GolonganController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kode' => 'required|string|max:255|unique:golongans,kode',
+            'nama' => 'required|string|max:255',
+            'gaji' => 'required|numeric',
+            'keterangan' => 'nullable|string',
+        ]);
+
+        Golongan::create($request->all());
+
+        return redirect()->route('golongan.index')->with('success', 'Golongan created successfully.');
     }
 
     /**
@@ -36,7 +49,7 @@ class GolonganController extends Controller
      */
     public function show(Golongan $golongan)
     {
-        //
+        // Tidak perlu implementasi show jika tidak ada halaman detail tunggal
     }
 
     /**
@@ -44,7 +57,9 @@ class GolonganController extends Controller
      */
     public function edit(Golongan $golongan)
     {
-        //
+        return Inertia::render('Golongan/Edit', [
+            'golongan' => $golongan,
+        ]);
     }
 
     /**
@@ -52,7 +67,16 @@ class GolonganController extends Controller
      */
     public function update(Request $request, Golongan $golongan)
     {
-        //
+        $request->validate([
+            'kode' => 'required|string|max:255|unique:golongans,kode,' . $golongan->id,
+            'nama' => 'required|string|max:255',
+            'gaji' => 'required|numeric',
+            'keterangan' => 'nullable|string',
+        ]);
+
+        $golongan->update($request->all());
+
+        return redirect()->route('golongan.index')->with('success', 'Golongan updated successfully.');
     }
 
     /**
@@ -60,6 +84,19 @@ class GolonganController extends Controller
      */
     public function destroy(Golongan $golongan)
     {
-        //
+        $golongan->delete();
+
+        return redirect()->route('golongan.index')->with('success', 'Golongan deleted successfully.');
+    }
+
+    /**
+     * Get salary structure from Golongan data. (This method is for the SalaryStructure page, not part of resource)
+     */
+    public function getSalaryStructure()
+    {
+        $golongans = Golongan::all();
+        return Inertia::render('SalaryStructure', [
+            'golongans' => $golongans,
+        ]);
     }
 }

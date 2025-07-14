@@ -6,9 +6,8 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Separator } from '@/components/ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { PayrollCards } from './PayrollCards';
-
-
-
+import SalaryStructure from '../SalaryStructure';
+import SalaryChart from '@/components/dashboard/SalaryChart';
 
 const summary = {
   totalSalary: 150000000,
@@ -48,7 +47,7 @@ export default function Page() {
                              <PayrollCards summary={summary} />
                             </div>
                             <div className="px-4 lg:px-6">
-                         
+                                <SalaryChart/>
                             </div>
                         </div>
                     </div>

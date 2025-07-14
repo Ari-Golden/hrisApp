@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\employee;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 

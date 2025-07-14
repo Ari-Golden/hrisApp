@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Candidate;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,67 +13,23 @@ class RecruitmentController extends Controller
      */
     public function index()
     {
-        // Data dummy
         $stats = [
-            'totalApplicants' => 150,
-            'totalPositions' => 12,
-            'totalSorted' => 90,
+            'totalApplicants' => Candidate::count(),
+            'totalPositions' => Candidate::distinct('position')->count('position'),
+            'totalSorted' => Candidate::where('status', 'shortlisted')->count(),
             'totalByStage' => [
-                'screening' => 40,
-                'interview' => 30,
-                'offering' => 10,
-                'rejected' => 10,
+                'screening' => Candidate::where('status', 'pending')->count(),
+                'interview' => Candidate::where('status', 'interview')->count(),
+                'offering' => 0, // Assuming no 'offering' status in the new model
+                'rejected' => Candidate::where('status', 'rejected')->count(),
             ],
-            'totalJoined' => 25,
+            'totalJoined' => 0, // Assuming no 'joined' status in the new model
         ];
-         $candidates = [
-            [
-                'id' => 1,
-                'name' => 'Ayu Rahma',
-                'position' => 'Frontend Developer',
-                'status' => 'shortlisted',
-                'appliedAt' => '2025-06-20',
-            ],
-            [
-                'id' => 2,
-                'name' => 'Rizky Pratama',
-                'position' => 'UI/UX Designer',
-                'status' => 'interview',
-                'appliedAt' => '2025-06-19',
-            ],
-            [
-                'id' => 3,
-                'name' => 'Siti Aminah',
-                'position' => 'Backend Engineer',
-                'status' => 'pending',
-                'appliedAt' => '2025-06-18',
-            ],
-            [
-                'id' => 4,
-                'name' => 'Daniel Mahendra',
-                'position' => 'Data Analyst',
-                'status' => 'rejected',
-                'appliedAt' => '2025-06-15',
-            ],
-            [
-                'id' => 5,
-                'name' => 'Yusuf Hidayat',
-                'position' => 'QA Tester',
-                'status' => 'shortlisted',
-                'appliedAt' => '2025-06-17',
-            ],
-            [
-                'id' => 6,
-                'name' => 'Nurul Aini',
-                'position' => 'Mobile App Developer',
-                'status' => 'interview',
-                'appliedAt' => '2025-06-14',
-            ],
-        ];
+
         return Inertia::render('Recruitment/Index',
          [
             'stats' => $stats,
-            'candidates' => $candidates,
+            'candidates' => Candidate::all(),
         ]
     );
     }

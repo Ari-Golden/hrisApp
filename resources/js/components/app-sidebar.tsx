@@ -37,7 +37,7 @@ const data = {
       items: [
         {
           title: "Recruitment Calender",
-          url: "#",
+          url: "/Calendar",
         },
         {
           title: "Screening Candidates",
@@ -76,7 +76,7 @@ const data = {
         },
         {
           title: "Sallary Structure",
-          url: "#",
+          url: "/salary-structure",
         },
          {
           title: "Benefits",
