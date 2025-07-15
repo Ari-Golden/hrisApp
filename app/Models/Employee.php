@@ -18,6 +18,7 @@ class Employee extends Model
         'departemen_id',
         'status',
         'status_pernikahan',
+        'jumlah_tanggungan',
         'join_date',       // ⬅️ tambah ini
         'foto',            // ⬅️ dan ini
         'alamat',

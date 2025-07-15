@@ -1,28 +1,27 @@
 import AppLayout from "@/layouts/app-layout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { PageProps } from "@/types";
-import FullCalendar from "@fullcalendar/react";
+import FullCalendar, { EventClickArg } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Event } from "@fullcalendar/core";
 
 export default function CalendarPage({ auth }: PageProps) {
     const [openDialog, setOpenDialog] = useState(false);
-    const [selectedEvent, setSelectedEvent] = useState<any>(null);
+    const [selectedEvent, setSelectedEvent] = useState<(Event & { sourceType: string }) | null>(null);
     const { delete: destroy } = useForm();
 
-    const handleEventClick = (clickInfo: any) => {
+    const handleEventClick = (clickInfo: EventClickArg) => {
         const [sourceType, id] = clickInfo.event.id.split('-');
         setSelectedEvent({
+            ...clickInfo.event,
             id: id,
-            title: clickInfo.event.title,
-            start: clickInfo.event.startStr,
-            end: clickInfo.event.endStr,
             sourceType: sourceType,
-        });
+        } as Event & { sourceType: string });
         setOpenDialog(true);
     };
 
@@ -71,8 +70,8 @@ export default function CalendarPage({ auth }: PageProps) {
                     <DialogHeader>
                         <DialogTitle>{selectedEvent?.title}</DialogTitle>
                     </DialogHeader>
-                    <p>Start: {selectedEvent?.start}</p>
-                    <p>End: {selectedEvent?.end}</p>
+                    <p>Start: {selectedEvent?.startStr}</p>
+                    <p>End: {selectedEvent?.endStr}</p>
                     <DialogFooter>
                         {selectedEvent?.sourceType === 'event' && (
                             <Link href={route("events.edit", selectedEvent?.id)}>

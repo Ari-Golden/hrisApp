@@ -30,6 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
     Route::resource('Recruitment',RecruitmentController::class);
     Route::resource('Payroll',PayrollController::class);
+    Route::get('payroll/tax', [PayrollController::class, 'taxIndex'])->name('payroll.tax.index');
     Route::get('Calendar', [CalendarController::class, 'index'])->name('Calendar');
     Route::get('api/events', [CalendarController::class, 'events']);
     Route::resource('events', EventController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
@@ -46,6 +47,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('salary-structure', [GolonganController::class, 'getSalaryStructure'])->name('salary.structure');
     Route::resource('benefit', BenefitController::class);
     Route::resource('amount', AmountController::class);
+    Route::resource('leaves', \App\Http\Controllers\LeaveController::class);
 });
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

@@ -17,22 +17,8 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { usePage } from "@inertiajs/react"
-import { EmployeeTable } from "./Employees/EmployeeTable"
 
 export default function Page() {
-  const { props } = usePage<{
-    totalEmployee: number
-    totalMaleEmployee: number
-    totalFemaleEmployee: number
-    newEmployee: number
-    terminatedEmployee: number
-    leaveEmployee: number
-    employees : []
-  }>()
-
-  
-
   return (
     <SidebarProvider>
       <AppSidebar />

@@ -15,4 +15,9 @@ class Golongan extends Model
     {
         return $this->hasMany(Employee::class, 'gol_id');
     }
+
+    public function amounts()
+    {
+        return $this->hasMany(Amount::class, 'golongan_id');
+    }
 }

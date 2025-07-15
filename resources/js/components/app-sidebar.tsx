@@ -87,12 +87,12 @@ const data = {
           url: "/amount",
         },
          {
-          title: "Task",
-          url: "#",
+          title: "Tax / Pajak",
+          url: "/payroll/tax",
         },
          {
           title: "Leave",
-          url: "#",
+          url: "/leaves",
         },
         {
           title: "Payroll Proses",
