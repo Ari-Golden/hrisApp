@@ -86,6 +86,15 @@ class PayrollController extends Controller
         ]);
     }
 
+    public function prosesPayroll()
+    {
+        $employees = Employee::with('golongan.amounts.benefit')->get();
+        return Inertia::render('Payroll/PayrollProses/Index', [
+            'employees' => $employees,
+        ]);
+       
+    }
+
     /**
      * Show the form for creating a new resource.
      */

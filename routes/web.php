@@ -31,13 +31,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('Recruitment',RecruitmentController::class);
     Route::resource('Payroll',PayrollController::class);
     Route::get('payroll/tax', [PayrollController::class, 'taxIndex'])->name('payroll.tax.index');
+    Route::get('payroll/proses', [PayrollController::class, 'prosesPayroll'])->name('payroll.proses');
     Route::get('Calendar', [CalendarController::class, 'index'])->name('Calendar');
     Route::get('api/events', [CalendarController::class, 'events']);
     Route::resource('events', EventController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
-
     Route::resource('Employee', EmployeeController::class);
     Route::resource('Attendance', AttendanceController::class);
-
     Route::get('Golongan', [GolonganController::class, 'index'])->name('golongan.index');
     Route::get('Golongan/create', [GolonganController::class, 'create'])->name('golongan.create');
     Route::post('Golongan', [GolonganController::class, 'store'])->name('golongan.store');
