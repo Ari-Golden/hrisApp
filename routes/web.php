@@ -7,6 +7,8 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\GolonganController;
+use App\Http\Controllers\BenefitController;
+use App\Http\Controllers\AmountController;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,6 +44,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('Golongan/{golongan}', [GolonganController::class, 'update'])->name('golongan.update');
     Route::delete('Golongan/{golongan}', [GolonganController::class, 'destroy'])->name('golongan.destroy');
     Route::get('salary-structure', [GolonganController::class, 'getSalaryStructure'])->name('salary.structure');
+    Route::resource('benefit', BenefitController::class);
+    Route::resource('amount', AmountController::class);
 });
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

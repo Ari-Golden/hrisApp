@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         JabatanSeeder::class,
         EmployeeSeeder::class,
         AttendanceSeeder::class, // setelah data referensi
+        BenefitSeeder::class,
+        AmountSeeder::class,
     ]);
 
         $this->call([
